@@ -1,3 +1,5 @@
+import os
+import uvicorn
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
@@ -18,3 +20,6 @@ app.include_router(command_router)
 app.include_router(login_router)
 
 Base.metadata.create_all(bind=engine)
+
+if __name__ == "__main__":
+    uvicorn.run("main.app", host="0.0.0.0", port=int(os.environ.get("PORT", 8000)))
